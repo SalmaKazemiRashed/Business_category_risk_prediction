@@ -34,6 +34,8 @@ This project analyzes Yelp reviews to **predict business categories** and **iden
 | Text + Base + Categories | 89.23% | +0.06% |
 | **Text + Base + Categories + Tips** | **89.63%** | **+0.46%** 🏆 |
 
+![](./Static_Presentation/Slide3.png)
+
 ---
 
 ##  Data Sources
@@ -88,9 +90,47 @@ This project analyzes Yelp reviews to **predict business categories** and **iden
 - `max_tip_security_keywords`, `avg_tip_age_days`
 - `newest_tip_age_days`, `security_tip_ratio`, `security_volatility`
 
+![](./Static_Presentation/Slide2.png)
 ---
 
 ##  Model Architecture
+
+```plaintext
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                    MODEL TRAINING & EVALUATION                                  │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│  MODEL CONFIGURATIONS                                                           │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                 │
+│  1. TEXT ONLY                                                                   │
+│     ┌─────────────────────────────────────────────────────────────────────┐     │
+│     │  Review Text (TF-IDF) → Logistic Regression                         │     │
+│     └─────────────────────────────────────────────────────────────────────┘     │
+│     Accuracy: 89.17% | F1-Score: 0.8796                                         │
+│                                                                                 │
+│  2. TEXT + BASE SECURITY                                                        │
+│     ┌─────────────────────────────────────────────────────────────────────┐     │
+│     │  Review Text + 12 Base Features → Logistic Regression               │     │
+│     └─────────────────────────────────────────────────────────────────────┘     │
+│     Accuracy: 89.17% | F1-Score: 0.8796                                         │
+│                                                                                 │
+│  3. TEXT + BASE + SECURITY CATEGORIES                                           │
+│     ┌─────────────────────────────────────────────────────────────────────┐     │
+│     │  Review Text + Base + 5 Category Features → Logistic Regression     │     │
+│     └─────────────────────────────────────────────────────────────────────┘     │
+│     Accuracy: 89.23% | F1-Score: 0.8803                                         │
+│                                                                                 │
+│  4. TEXT + BASE + CATEGORIES + TIPS 🏆                                          │
+│     ┌─────────────────────────────────────────────────────────────────────┐     │
+│     │  Review Text + Base + Categories + 12 Tip Features → Logistic Reg   │     │
+│     └─────────────────────────────────────────────────────────────────────┘     │
+│     Accuracy: 89.63% | F1-Score: 0.8852                                         │
+│                                                                                 │
+└─────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -117,6 +157,7 @@ This project analyzes Yelp reviews to **predict business categories** and **iden
 - **Base Features**: 3 (12%)
 - **Category Features**: 0 (0%) - Not in top 25
 
+![](./Static_Presentation/Slide4.png)
 ---
 
 ## 📊 Category-wise Performance
@@ -179,9 +220,10 @@ This project analyzes Yelp reviews to **predict business categories** and **iden
 - **Storage**: PostgreSQL/Vector DB
 - **Containerization**: Docker
 
+![](./Static_Presentation/Slide6.png)
 ---
 
-## 🔧 Installation & Setup
+##  Installation & Setup
 
 ### Clone the Repository
 ```bash
@@ -190,3 +232,79 @@ cd Business_category_risk_prediction
 ```
 
 
+### Download Yelp Dataset
+Visit [Yelp Open Dataset](https://business.yelp.com/data/resources/open-dataset/)
+
+Download and extract the dataset.
+
+Place in ./data/Yelp-JSON/Yelp JSON/
+
+
+### Run Jupyter Notebook
+```bash
+jupyter notebook Business_category_risk_prediction.ipynb
+```
+### Run API
+```bash
+uvicorn main:app --reload
+```
+
+
+📁 Project Structure
+text
+security_risk_analysis/
+├── Business_category_risk_prediction.ipynb   # Main notebook
+├── requirements.txt                          # Python dependencies
+├── README.md                                 # Project documentation
+├── data/
+│   └── Yelp-JSON/
+│       └── Yelp JSON/                        # Yelp dataset
+├── models/
+│   └── saved_models/                         # Saved model artifacts
+└── static_Presentation/
+    └── Slides                                # Generated visualizations
+    └── LLM_api.py
+
+### Future Improvements
+
+#### Real-time Monitoring Pipeline
+
+- Stream processing of new reviews
+
+- Automated alert system
+
+#### Advanced NLP
+
+- BERT embeddings for better text understanding
+
+- Fine-tuning on security-specific datasets
+
+#### Multi-modal Analysis
+
+- Image analysis of business locations
+
+- Social media monitoring
+
+#### Explainable AI
+
+- SHAP/LIME integration for model interpretability
+
+- Stakeholder-friendly explanations
+
+#### Production Scaling
+
+Kubernetes deployment
+
+Load balancing for high volume
+
+
+## Feature Importance
+The analysis shows tip features (std_tip_sentiment, tip_count, max_tip_sentiment) are the most important predictors, followed by text features like "food" and "appointment".
+
+
+## Acknowledgments
+Yelp for providing the open dataset
+
+Securitas for the interview opportunity
+
+Open-source community for the tools and libraries.
