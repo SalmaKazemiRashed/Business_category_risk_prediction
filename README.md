@@ -192,6 +192,8 @@ This project analyzes Yelp reviews to **predict business categories** and **iden
 - **City Patterns**: Certain cities show more security mentions
 - **Regional Analysis**: Different security patterns by region
 
+
+![](./Static_Presentation/Slide5.png)
 ---
 
 ##  Deployment Recommendations
@@ -250,8 +252,8 @@ uvicorn main:app --reload
 ```
 
 
-📁 Project Structure
-text
+## Project Structure
+```plaintext
 security_risk_analysis/
 ├── Business_category_risk_prediction.ipynb   # Main notebook
 ├── requirements.txt                          # Python dependencies
@@ -265,6 +267,7 @@ security_risk_analysis/
     └── Slides                                # Generated visualizations
     └── LLM_api.py
 
+```
 ### Future Improvements
 
 #### Real-time Monitoring Pipeline
