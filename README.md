@@ -11,6 +11,8 @@ This project analyzes Yelp reviews to **predict business categories** and **iden
 - **Solution**: Automated analysis of reviews to proactively identify security risks
 - **Value**: Early warning system for potential incidents, data-driven resource allocation
 
+![](./Static_Presentation/Slide1.png)
+
 ---
 
 ##  Key Results
